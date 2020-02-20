@@ -6,7 +6,8 @@ module.exports = {
     add,
     remove,
     update,
-    findSteps
+    findSteps,
+    addStep
 };
 
 // find all schemes
@@ -32,6 +33,12 @@ function findSteps(id) {
 // create a new scheme
 function add(scheme) {
     return db('schemes').insert(scheme, 'id');
+}
+
+// create a new step for a scheme using its scheme id
+function addStep(stepData, scheme_id) {
+    const stepInfo = { ...stepData, scheme_id: Number(scheme_id) }
+    return db('steps').insert(stepInfo, 'id');
 }
 
 // update a scheme
